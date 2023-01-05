@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import Home from './pages/Home'
 import SignIn from './pages/SignIn'
@@ -12,15 +14,19 @@ function App() {
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
-		setLoading(true)
-		axios.get(`http://192.168.8.100/api/${username}`).then(res => {
+		if (username) {
+			setLoading(true)
+			axios.get(`http://192.168.8.100/api/${username}`).then(res => {
+				setLoading(false)
+				if (res.data.error) {
+					setToken(undefined)
+				} else {
+					setToken(username)
+				}
+			})
+		} else {
 			setLoading(false)
-			if (res.data.error) {
-				setToken(undefined)
-			} else {
-				setToken(username)
-			}
-		})
+		}
 	}, [])
 
 	return (
@@ -29,23 +35,37 @@ function App() {
 		// 		<h1 className='h-60 w-80'>Hej</h1>
 		// 	</Container>
 		// </div>
-		<BrowserRouter>
-			<Routes>
-				{loading ? (
-					<Route path='/' element={<Layout />}>
-						<Route index element={<div>Loading...</div>} />
-					</Route>
-				) : token ? (
-					<Route path='/' element={<Layout />}>
-						<Route index element={<Home />} />
-					</Route>
-				) : (
-					<Route path='/' element={<Layout />}>
-						<Route index element={<SignIn />} />
-					</Route>
-				)}
-			</Routes>
-		</BrowserRouter>
+		<>
+			<ToastContainer
+				position='top-right'
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme='dark'
+			/>
+			<BrowserRouter>
+				<Routes>
+					{loading ? (
+						<Route path='/' element={<Layout />}>
+							<Route index element={<div>Loading...</div>} />
+						</Route>
+					) : token ? (
+						<Route path='/' element={<Layout />}>
+							<Route index element={<Home />} />
+						</Route>
+					) : (
+						<Route path='/' element={<Layout />}>
+							<Route index element={<SignIn />} />
+						</Route>
+					)}
+				</Routes>
+			</BrowserRouter>
+		</>
 	)
 }
 
