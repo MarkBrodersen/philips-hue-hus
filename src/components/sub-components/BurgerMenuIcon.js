@@ -6,7 +6,6 @@ const BurgerMenuIcon = () => {
     <div
       onClick={() => {
         setClicked(!clicked);
-        console.log(clicked);
       }}
       className="w-6 flex justify-between items-center relative"
     >
