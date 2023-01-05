@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import Home from './pages/Home'
 import SignIn from './pages/SignIn'
 import Layout from './Layout'
+import Rooms from './pages/Rooms'
 
 function App() {
 	const [token, setToken] = useState('')
@@ -38,6 +39,7 @@ function App() {
 				) : token ? (
 					<Route path='/' element={<Layout />}>
 						<Route index element={<Home />} />
+						<Route path='/rooms' element={<Rooms />} />
 					</Route>
 				) : (
 					<Route path='/' element={<Layout />}>
