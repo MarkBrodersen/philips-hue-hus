@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import Home from './pages/Home'
 import SignIn from './pages/SignIn'
 import Layout from './Layout'
+import NewTheme from './pages/NewTheme'
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
 				) : token ? (
 					<Route path='/' element={<Layout />}>
 						<Route index element={<Home />} />
+						<Route path="/newtheme" element={<NewTheme/>} />
 						
 					</Route>
 				) : (
