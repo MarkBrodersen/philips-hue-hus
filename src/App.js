@@ -45,20 +45,10 @@ function App() {
       />
       <BrowserRouter>
         <Routes>
-          {loading ? (
-            <Route path="/" element={<Layout />}>
-              <Route index element={<div>Loading...</div>} />
-            </Route>
-          ) : token ? (
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route path="/rooms" element={<Home />} />
-            </Route>
-          ) : (
-            <Route path="/" element={<Layout />}>
-              <Route index element={<SignIn />} />
-            </Route>
-          )}
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/rooms" element={<Home />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
