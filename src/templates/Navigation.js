@@ -9,25 +9,27 @@ const Navigation = () => {
   return (
     <header className="w-full p-4 pr-6 flex justify-between  fixed top-0">
       {place !== "/" ? (
-        <button onClick={navigate("/")}>
+        <button onClick={() => navigate(-1)}>
           <ChevronLeft className="w-7 h-7" />
         </button>
       ) : (
         <p className="w-[28px] h-[28px]"></p>
       )}
       {place === "/" ? (
-        <h1>Home</h1>
+        <h1 className="text-3xl text-stone-50 font-bold">Home</h1>
       ) : (
         (place = "/rooms" ? (
-          <h1>Rooms</h1>
+          <h1 className="text-3xl text-stone-50 font-bold">Rooms</h1>
         ) : (
           (place = "/newroom" ? (
-            <h1>New Room</h1>
+            <h1 className="text-3xl text-stone-50 font-bold">New Room</h1>
           ) : (
             (place = "/themes" ? (
-              <h1>Themes</h1>
+              <h1 className="text-3xl text-stone-50 font-bold">Themes</h1>
             ) : (
-              (place = "/newtheme" ? <h1>New Theme</h1> : null)
+              (place = "/newtheme" ? (
+                <h1 className="text-3xl text-stone-50 font-bold">New Theme</h1>
+              ) : null)
             ))
           ))
         ))
