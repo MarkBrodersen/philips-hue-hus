@@ -2,15 +2,25 @@ import Container from "../components/Container";
 import Sheet from "react-modal-sheet";
 import {useState} from "react";
 import {X, BedSingle, Monitor, Tent, Sofa, Home, VenetianMask, ShowerHead, UtensilsCrossed, Lightbulb} from "lucide-react"
-import { SketchPicker } from "react-color";
+import { CirclePicker } from "react-color";
 const NewTheme = () => {
     const [isOpen, setOpen] = useState(false)
     const [Icon, setIcon] = useState('');
     const [isColorOpen, setColorOpen] = useState(false)
+    const [currentColor, setCurrentColor] = useState("")
+
+    const handleColorChange = (color) => {
+        setCurrentColor(color.hex)
+        
+       
+    }
+
     function iconPicker(icon) {
         setIcon(icon)
         setOpen(false)
     }
+    
+
     return ( 
     <div>
         <div className="w-72 m-auto pt-8">
@@ -24,23 +34,23 @@ const NewTheme = () => {
             <div className="p-4 ">
             <button  onClick={() => setOpen(true)}>
                 {Icon === "bedsingle" ? (
-                    <BedSingle color="white" size={28}/>
+                    <BedSingle color="white" size={38}/>
                 ) : Icon === "Monitor" ? (
-                    <Monitor color="white" size={28}/>
+                    <Monitor color="white" size={38}/>
                 ) : Icon === "utensilscrossed" ? (
-                    <UtensilsCrossed color="white" size={28}/>
+                    <UtensilsCrossed color="white" size={38}/>
                 ) : Icon === "sofa" ? (
-                    <Sofa color="white" size={28}/>
+                    <Sofa color="white" size={38}/>
                 ) : Icon === "home" ? (
-                    <Home color="white" size={28}/>
+                    <Home color="white" size={38}/>
                 ) : Icon === "venetianmask" ? (
-                    <VenetianMask color="white" size={28}/>
+                    <VenetianMask color="white" size={38}/>
                 ) : Icon === "showerhead" ? (
-                    <ShowerHead color="white" size={28}/>
+                    <ShowerHead color="white" size={38}/>
                 ) : Icon === "tent" ? (
-                    <Tent color="white" size={28}/>
+                    <Tent color="white" size={38}/>
                 ) : (
-                    <Lightbulb color="white" size={28}/>
+                    <Lightbulb color="white" size={38}/>
                     )
             }
                 </button>
@@ -68,15 +78,21 @@ const NewTheme = () => {
         </Sheet.Container>
         </Sheet>
 
-                <Container>
-                    <button onClick={() => setColorOpen(true)}>xd</button>
+                <Container fit>
+                    <div style={{background: currentColor}} className="">
+                    <button onClick={() => setColorOpen(true)}>Change color</button>
+                    </div>
+                  
                 </Container>
-                <Sheet isOpen={isColorOpen} detent="content-height" disableDrag={true} onClose={() => setColorOpen(false)}>
+                <Sheet isOpen={isColorOpen} detent="full-height" disableDrag={true} onClose={() => setColorOpen(false)}>
                     <Sheet.Container>
-                        <Sheet.Header className="bg-zinc-900"/>
+                    <Sheet.Header className="bg-zinc-900"/>
                         <Sheet.Content className="bg-zinc-900">
-                        <button className="absolute top-0 right-5" onClick={() => setColorOpen(false)}><X color="white" size={28}/></button>
-                        <SketchPicker />
+                            <div>
+                            <button className="absolute top-0 right-5" onClick={() => setColorOpen(false)}><X color="white" size={28}/></button>
+                             <CirclePicker circleSpacing={38} circleSize={50} color={currentColor} onChangeComplete={handleColorChange} className=" absolute  justify-between  top-16 left-20"/>
+                            </div>
+                       
                         </Sheet.Content>
                     </Sheet.Container>
             
