@@ -76,15 +76,15 @@ export default function SignIn() {
 
 	return (
 		<div className='py-6'>
-			<div className='w-full flex flex-col gap-6 px-4 py-6 shadow-none max-w-3xl transition-all md:shadow-container md:rounded-3xl md:mx-auto md:px-6 md:py-8 md:bg-gradient-to-tr md:from-zinc-800/25 md:to-zinc-800/50'>
+			<div className='w-full flex flex-col gap-6 px-4 py-6 shadow-none max-w-3xl transition-all md:shadow-container md:rounded-3xl md:mx-auto md:px-6 md:py-8 md:bg-gradient-to-tr md:from-stone-800/25 md:to-stone-800/50'>
 				<div className='flex flex-col gap-2'>
-					<h1 className='text-zinc-50 text-3xl font-bold'>Sign Up</h1>
-					<p className='text-zinc-400'>Please sign up to continue</p>
+					<h1 className='text-stone-50 text-3xl font-bold'>Sign Up</h1>
+					<p className='text-stone-400'>Please sign up to continue</p>
 				</div>
 
 				<section className='flex flex-col gap-4'>
 					<div className='flex flex-col gap-2'>
-						<p className='text-sm text-zinc-500'>
+						<p className='text-sm text-stone-500'>
 							Already have a username? Sign in here
 						</p>
 						<Container>
@@ -99,7 +99,7 @@ export default function SignIn() {
 					</div>
 
 					<button
-						className='shadow-pink bg-pink-300 h-14 w-full rounded-3xl text-zinc-900 font-bold'
+						className='shadow-pink bg-pink-300 h-14 w-full rounded-3xl text-stone-900 font-bold'
 						onClick={e => {
 							e.preventDefault()
 							submit()
@@ -123,14 +123,14 @@ export default function SignIn() {
 					<Container>
 						<input
 							type='text'
-							className='bg-transparent focus:outline-none flex w-full px-6 h-14 rounded-3xl text-zinc-50 font-medium'
+							className='bg-transparent focus:outline-none flex w-full px-6 h-14 rounded-3xl text-stone-50 font-medium'
 							placeholder='New username'
 							value={newUsername}
 							onChange={e => setNewUsername(e.target.value)}
 						/>
 					</Container>
 					<button
-						className='shadow-pink bg-pink-300 h-14 w-full rounded-3xl text-zinc-900 font-bold'
+						className='shadow-pink bg-pink-300 h-14 w-full rounded-3xl text-stone-900 font-bold'
 						onClick={createUsername}
 					>
 						Submit username
