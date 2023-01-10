@@ -6,10 +6,10 @@ import { useRef, useState } from 'react'
 import useAxios from '../../hooks/useAxios'
 import axios from 'axios'
 import { LightBulbIcon } from '@heroicons/react/24/solid'
+import PowerButton from '../buttons/PowerButton'
 
 export default function GridItem({ item, on, id }) {
 	const container = useRef(null)
-	console.log(item)
 
 	const [body, setBody] = useState({})
 	const [light, setLight] = useState()
@@ -126,7 +126,7 @@ export default function GridItem({ item, on, id }) {
 							)}
 						</AnimatePresence>
 					</div>
-					<motion.button
+					{/* <motion.button
 						onClick={handleClick}
 						animate={{
 							background: all ? '#F472B6' : any ? '#BE185D' : '#44403C',
@@ -140,7 +140,8 @@ export default function GridItem({ item, on, id }) {
 						className='rounded-full bg-pink-300 h-16 w-16 md:w-12 md:h-12 shadow-pinkglow flex items-center justify-center'
 					>
 						<PowerIcon strokeWidth={3} className='h-7 w-7 md:h-6 md:w-6' />
-					</motion.button>
+					</motion.button> */}
+					<PowerButton action={handleClick} all={all} any={any} />
 				</div>
 				<div ref={container}>
 					<h3

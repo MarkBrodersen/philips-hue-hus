@@ -5,7 +5,7 @@ import Loading from '../components/animation/Loading'
 import { PlusIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
 
-export default function RoomsList({ max, includeAdd }) {
+export default function RoomsList({ max, includeAdd, addAction }) {
 	const [rooms, setRooms] = useState()
 
 	const { response, loading } = useAxios('groups')
@@ -37,11 +37,11 @@ export default function RoomsList({ max, includeAdd }) {
 				})
 			)}
 			{includeAdd && (
-				<button className='flex flex-col p-6 justify-end items-start w-auto aspect-square bg-stone-800 rounded-3xl'>
+				<button
+					onClick={addAction}
+					className='flex flex-col p-6 justify-center items-center w-auto aspect-square bg-stone-800 rounded-3xl'
+				>
 					<PlusIcon className='w-16 h-16 stroke-2 text-stone-500 -ml-2' />
-					<p className='xs:text-sm sm:text-xl md:text-base font-bold text-stone-400 text-left'>
-						Add new room
-					</p>
 				</button>
 			)}
 		</div>

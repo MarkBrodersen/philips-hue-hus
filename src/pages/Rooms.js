@@ -3,6 +3,7 @@ import { PlusIcon } from '@heroicons/react/24/outline'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import Container from '../components/Container'
+import Sheet from '../components/Sheet'
 
 export default function Rooms() {
 	const [openNewRoom, setOpenNewRoom] = useState(false)
@@ -12,36 +13,55 @@ export default function Rooms() {
 			<div className='flex flex-col gap-6'>
 				<div className='flex items-end justify-between'>
 					<h1 className='text-4xl font-bold'>Rooms</h1>
-					<motion.button
-						animate={{
-							rotate: openNewRoom ? 45 : 0,
-							transition: { type: 'spring', stiffness: 300, damping: 20 },
-						}}
-						onClick={() => setOpenNewRoom(!openNewRoom)}
-						className='p-1'
-					>
-						<PlusIcon className='w-8 h-8 stroke-2 text-stone-500' />
-					</motion.button>
+					<AnimatePresence>
+						{!openNewRoom && (
+							<motion.button
+								initial={{ rotate: -45, opacity: 0, scale: 0.5 }}
+								animate={{ opacity: 1, rotate: 0, scale: 1 }}
+								exit={{ opacity: 0, rotate: -45, scale: 0.5 }}
+								// animate={{
+								// 	rotate: openNewRoom ? 45 : 0,
+								// 	transition: { type: 'spring', stiffness: 300, damping: 20 },
+								// }}
+								onClick={() => setOpenNewRoom(!openNewRoom)}
+								className='p-1'
+							>
+								<PlusIcon className='w-8 h-8 stroke-2 text-stone-500' />
+							</motion.button>
+						)}
+					</AnimatePresence>
 				</div>
-				<RoomsList includeAdd setOpen={setOpenNewRoom} />
+				<RoomsList includeAdd addAction={setOpenNewRoom} />
 			</div>
 			<div className='md:col-span-2'>
 				<AnimatePresence>
-					{openNewRoom && (
+					{/* {openNewRoom && (
 						<motion.div
 							initial={{ y: 24, opacity: 0 }}
 							animate={{ opacity: 1, y: 0 }}
 							exit={{ opacity: 0, y: 24 }}
-							className='fixed md:relative top-20 md:top-0 left-0 w-full h-fit'
+							className='fixed md:relative top-0 md:top-0 left-0 w-full h-full pt-16'
 						>
-							{/* <Container bgBlur> */}
-							<div className='shadow-container rounded-3xl bg-stone-800 flex flex-col gap-4 p-6'>
+							<div className='shadow-container rounded-3xl bg-stone-800 flex flex-col gap-4 p-6 h-full'>
 								<h1 className='text-3xl font-bold'>New Room</h1>
 							</div>
-							{/* </Container> */}
 						</motion.div>
-					)}
+					)} */}
 				</AnimatePresence>
+				<Sheet
+					inGrid
+					open={openNewRoom}
+					setOpen={setOpenNewRoom}
+					title='New Room'
+					confirmCancel
+				>
+					<div className='flex flex-col gap-4'>
+						<div className='flex flex-col gap-2'>
+							<label className='text-lg font-bold'>Name</label>
+							<input className='input' />
+						</div>
+					</div>
+				</Sheet>
 			</div>
 		</div>
 	)

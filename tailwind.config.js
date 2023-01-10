@@ -9,6 +9,7 @@ module.exports = {
 				pink: '0px 8px 32px rgba(190, 24, 93, 0.25), inset 0px -1px 2px rgba(255, 255, 255, 0.6), inset 0px 4px 8px rgba(253, 242, 248, 0.5), inset 0px -4px 8px rgba(190, 24, 93, 0.3), inset 0px -8px 16px rgba(190, 24, 93, 0.25)',
 				pinkglow:
 					'0px 2px 16px #831843, 0px 2px 32px #F9A8D470, inset 0px -1px 2px rgba(255, 255, 255, 0.6), inset 0px 4px 8px rgba(253, 242, 248, 0.5), inset 0px -4px 8px rgba(190, 24, 93, 0.3), inset 0px -8px 16px rgba(190, 24, 93, 0.25)',
+				red: '0px 8px 32px rgba(185, 28, 28, 0.25), inset 0px -1px 2px rgba(255, 255, 255, 0.4), inset 0px 4px 8px rgba(254, 242, 242, 0.25), inset 0px -4px 8px rgba(185, 28, 28, 0.3), inset 0px -8px 16px rgba(185, 28, 28, 0.25)',
 			},
 			strokeWidth: {
 				3: '3',
