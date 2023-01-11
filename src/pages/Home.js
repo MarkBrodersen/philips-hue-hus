@@ -4,6 +4,7 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import Container from "../components/Container";
 import Zones from "../templates/Zones";
+import Lights from "../templates/Lights";
 
 export default function Home() {
   const { device, width } = useWindowDimensions();
@@ -35,8 +36,8 @@ export default function Home() {
           </Container>
           <h2 className="text-4xl font-bold mb-6">Lights</h2>
           <Container>
-            <div className="p-4 justify-between">
-              <Zones Zone="Alt" />
+            <div className="p-4 flex flex-col gap-4 justify-between">
+              <Lights />
             </div>
           </Container>
         </section>
