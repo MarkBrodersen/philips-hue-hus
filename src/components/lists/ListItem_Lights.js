@@ -1,41 +1,37 @@
 import PowerButton from "../buttons/PowerButton";
 import axios from "axios";
 import { useState } from "react";
-
-export default function ListItem_Zones({ item }) {
-  const [any, setAny] = useState(item.state.any_on);
-  const [all, setAll] = useState(item.state.any_on);
+export default function ListItem_Lights({ item }) {
+  const [on, setOn] = useState(item.state.on);
   function handleClick() {
-    if (any) {
+    if (on) {
       axios
         .put(
           `http://192.168.8.100/api/${localStorage.getItem(
             "username"
-          )}/groups/${item.id}/action`,
+          )}/lights/${item.id}/state`,
           {
             on: false,
           }
         )
         .then((response) => {
-          setAll(false);
-          setAny(false);
+          setOn(false);
         });
     } else {
       axios
         .put(
           `http://192.168.8.100/api/${localStorage.getItem(
             "username"
-          )}/groups/${item.id}/action`,
+          )}/lights/${item.id}/state`,
           {
             on: true,
           }
         )
         .then((response) => {
-          setAll(true);
-          setAny(true);
+          setOn(true);
         });
     }
   }
 
-  return <PowerButton action={handleClick} all={all} any={any} />;
+  return <PowerButton action={handleClick} all={on} />;
 }
