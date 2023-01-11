@@ -30,11 +30,11 @@ export default function Home() {
         <section className="flex flex-col md:col-span-2 ">
           <h2 className="text-4xl font-bold mb-6">Zones</h2>
           <Container>
-            <div className="p-4 justify-between">
+            <div className="p-4 flex flex-col gap-4 justify-between">
               <Zones Zone="Alt" />
             </div>
           </Container>
-          <h2 className="text-4xl font-bold mb-6">Lights</h2>
+          <h2 className="text-4xl mt-12 font-bold mb-6">Lights</h2>
           <Container>
             <div className="p-4 flex flex-col gap-4 justify-between">
               <Lights />

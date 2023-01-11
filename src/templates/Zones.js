@@ -1,9 +1,12 @@
 import { ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
-import PowerButton from "../components/buttons/PowerButton";
 import ListItem_Zones from "../components/lists/ListItem_Zones";
 import filterKeys from "../functions/filterKeys";
 import useAxios from "../hooks/useAxios";
+import {
+  ExclamationTriangleIcon,
+  LightBulbIcon,
+} from "@heroicons/react/24/solid";
 export default function Zones({}) {
   const [zones, setZones] = useState();
 
@@ -15,7 +18,6 @@ export default function Zones({}) {
     // take the keys of the response object and map them to the values as an id
 
     const zones = filterKeys(response, (item) => item.type === "Zone");
-    console.log(zones);
     setZones(zones);
   }, [response]);
 
@@ -24,10 +26,30 @@ export default function Zones({}) {
       {zones &&
         zones.map((items) => {
           return (
-            <div key={items.id} className="flex justify-between">
-              <div className="flex">
+            <div
+              key={items.id}
+              className="gap-4 flex justify-between items-center"
+            >
+              <div className="flex items-center">
                 <ListItem_Zones item={items} />
-                <h3>{items.name}</h3>
+                <div className="ml-4">
+                  <h3 className="font-bold">{items.name}</h3>
+                  {items.state.reachable ? (
+                    <div className="flex gap-1 items-center">
+                      <LightBulbIcon className="w-4 h-4 text-stone-400" />
+                      <p className="text-xs font-bold text-stone-500">
+                        Connected
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex gap-1 items-center">
+                      <ExclamationTriangleIcon className="w-4 h-4 text-yellow-400" />
+                      <p className="text-xs font-bold text-stone-500">
+                        Could not connect
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
               <ChevronRight />
             </div>

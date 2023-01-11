@@ -32,7 +32,7 @@ export default function Lights({}) {
               <div className="flex items-center">
                 <ListItem_Lights item={item} />
                 <div className="ml-4">
-                  <h3 className=" font-bold ">{item.name}</h3>
+                  <h3 className="font-bold">{item.name}</h3>
                   {item.state.reachable ? (
                     <div className="flex gap-1 items-center">
                       <LightBulbIcon className="w-4 h-4 text-stone-400" />

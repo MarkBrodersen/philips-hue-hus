@@ -94,7 +94,6 @@ export default function GridItem({ item, on, id }) {
             <motion.div
               initial={{ opacity: 0, scale: 0.75 }}
               animate={{
-                opacity: 1,
                 scale: 1,
                 opacity: any === true ? 1 : 0.75,
               }}
