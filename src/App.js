@@ -23,12 +23,10 @@ function App() {
 				if (res.data.error) {
 					setToken(undefined)
 				} else {
-					console.log('username')
 					setToken(username)
 				}
 			})
 		} else {
-			console.log('no username')
 			setLoading(false)
 		}
 	}, [])
