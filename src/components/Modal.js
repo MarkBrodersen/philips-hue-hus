@@ -23,8 +23,9 @@ export default function Modal({
 		>
 			<motion.div
 				initial={{ y: 24, opacity: 0 }}
-				animate={{ opacity: 1, y: 0 }}
+				animate={{ opacity: 1, y: 0, transition: { delay: 0.1 } }}
 				exit={{ opacity: 0, y: 24 }}
+				transition={{ ease: 'easeInOut' }}
 				className='bg-stone-800 rounded-3xl shadow-container w-full max-w-xl p-6 flex flex-col gap-4'
 			>
 				<h1 className='text-2xl font-bold text-stone-50'>{title}</h1>

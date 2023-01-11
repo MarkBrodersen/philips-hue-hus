@@ -28,7 +28,12 @@ export default function Loading() {
 					}}
 					animate={{
 						rotate: i * (360 / array.length),
-						y: (-8 * array.length) / 2,
+						y: [
+							(-16 * array.length) / 2,
+							(-8 * array.length) / 2,
+							(-8 * array.length) / 2,
+							(-4 * array.length) / 2,
+						],
 						opacity: [0, 1, 1, 0],
 						scale: [0.5, 1, 1, 0.5],
 						filter: ['blur(8px)', 'blur(0px)', 'blur(0px)', 'blur(0px)'],

@@ -1,41 +1,42 @@
-import useAxios from '../hooks/useAxios'
+// import useAxios from '../hooks/useAxios'
 import { useState, useEffect } from 'react'
 import GridItem from '../components/lists/GridItem_Room'
 import Loading from '../components/animation/Loading'
 import { PlusIcon } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom'
+import axios from 'axios'
+import useFilteredArrays from '../hooks/useFilteredArrays'
 
-export default function RoomsList({ max, includeAdd, addAction }) {
+export default function RoomsList({ max, includeAdd, addAction, items }) {
 	const [rooms, setRooms] = useState()
 
-	const { response, loading } = useAxios('groups')
+	// const { response, loading } = useAxios('groups')
+
+	// useEffect(() => {
+	// 	if (!response) return
+
+	// 	const rooms = Object.keys(response).map(key => {
+	// 		return { ...response[key], id: key }
+	// 	})
+
+	// 	console.log(rooms)
+
+	// 	setRooms(rooms)
+	// }, [response])
 
 	useEffect(() => {
-		if (!response) return
+		if (!items) return
 
-		// take the keys of the response object and map them to the values as an id
-
-		const rooms = Object.keys(response).map(key => {
-			return { ...response[key], id: key }
-		})
-
-		setRooms(rooms)
-	}, [response])
+		setRooms(items)
+	}, [items])
 
 	return (
 		<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-4'>
-			{loading ? (
-				<div className='w-full h-32 flex justify-center items-center'>
-					<Loading />
-				</div>
-			) : (
-				rooms &&
+			{rooms &&
 				rooms.map((room, index) => {
 					if (max && index >= max) return null
 
 					return <GridItem key={room.name} item={room} />
-				})
-			)}
+				})}
 			{includeAdd && (
 				<button
 					onClick={addAction}

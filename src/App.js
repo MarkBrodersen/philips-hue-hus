@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css'
 import Home from './pages/Home'
 import SignIn from './pages/SignIn'
 import Layout from './Layout'
-import NewRoom from './pages/NewRoom'
 import Loading from './components/animation/Loading'
 import Rooms from './pages/Rooms'
 
@@ -24,10 +23,12 @@ function App() {
 				if (res.data.error) {
 					setToken(undefined)
 				} else {
+					console.log('username')
 					setToken(username)
 				}
 			})
 		} else {
+			console.log('no username')
 			setLoading(false)
 		}
 	}, [])
@@ -62,7 +63,6 @@ function App() {
 					) : token ? (
 						<Route path='/' element={<Layout />}>
 							<Route index element={<Home />} />
-							<Route path='/new-room' element={<NewRoom />} />
 							<Route path='/rooms' element={<Rooms />} />
 						</Route>
 					) : (
