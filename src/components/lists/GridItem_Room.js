@@ -8,6 +8,8 @@ import {
 	ExclamationTriangleIcon,
 } from '@heroicons/react/24/solid'
 import PowerButton from '../buttons/PowerButton'
+import classes from '../../assets/roomClasses'
+import LucideIcon from '../sub-components/LucideIcon'
 
 export default function GridItem({ item }) {
 	const text = useRef(null)
@@ -28,7 +30,6 @@ export default function GridItem({ item }) {
 					)}/lights/${light}`
 				)
 				.then(response => {
-					console.log(response)
 					if (response.data.error || !response.data.state.reachable) {
 						setLightErrors(prev => [...prev, light])
 					}
@@ -101,6 +102,8 @@ export default function GridItem({ item }) {
 			})
 	}
 
+	const icon = classes.find(thisClass => thisClass.name === item.class)?.icon
+
 	return (
 		<Container>
 			<div className='relative isolate w-auto aspect-square p-4 rounded-3xl flex flex-col justify-between overflow-hidden'>
@@ -131,10 +134,11 @@ export default function GridItem({ item }) {
 							}}
 							className='absolute h-full w-full flex justify-center items-center'
 						>
-							<BedSingle
+							{/* <BedSingle
 								className='absolute w-7 h-7 text-pink-200'
 								strokeWidth={3}
-							/>
+							/> */}
+							{icon && <LucideIcon icon={icon} />}
 						</motion.div>
 						<AnimatePresence>
 							{any === true && (

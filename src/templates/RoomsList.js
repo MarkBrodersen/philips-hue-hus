@@ -1,10 +1,7 @@
 // import useAxios from '../hooks/useAxios'
 import { useState, useEffect } from 'react'
 import GridItem from '../components/lists/GridItem_Room'
-import Loading from '../components/animation/Loading'
 import { PlusIcon } from '@heroicons/react/24/outline'
-import axios from 'axios'
-import useFilteredArrays from '../hooks/useFilteredArrays'
 
 export default function RoomsList({ max, includeAdd, addAction, items }) {
 	const [rooms, setRooms] = useState()

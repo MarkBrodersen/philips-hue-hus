@@ -47,7 +47,7 @@ export default function NewRoom({ open, setOpen }) {
 							<h2 className='text-2xl font-bold text-stone-50'>
 								Choose lights
 							</h2>
-							<div className='grid grid-cols-3 md:grid-cols-4 gap-4'>
+							<div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
 								{lights &&
 									lightsNotInGroup.map(light => (
 										<Light
@@ -83,11 +83,14 @@ function Light({ light, selectedLights, setSelectedLights }) {
 					setSelectedLights([...selectedLights, light.id])
 				}
 			}}
-			className={`relative flex flex-col justify-center items-center text-center gap-2 transition-all ${
+			className={`relative flex flex-col justify-between items-start gap-2 transition-all ${
+				// selectedLights.includes(light.id)
+				// 	? 'bg-pink-300 shadow-pinkglow'
+				// 	: 'bg-stone-800 shadow-container'
 				selectedLights.includes(light.id)
-					? 'bg-pink-300 shadow-pinkglow'
-					: 'bg-stone-800 shadow-container'
-			} aspect-square rounded-3xl p-4 overflow-hidden`}
+					? 'shadow-container bg-pink-900'
+					: 'shadow-container'
+			} aspect-square bg-stone-800 rounded-3xl p-6 overflow-hidden`}
 		>
 			<LightBulbIcon
 				className={`w-16 h-16 stroke-2 transition-all ${
@@ -95,16 +98,11 @@ function Light({ light, selectedLights, setSelectedLights }) {
 				}`}
 			/>
 			<p
-				className={`absolute text-center w-full bottom-0 left-0 p-2 md:p-4 text-sm ${
+				className={`text-base text-start ${
 					selectedLights.includes(light.id)
-						? 'text-stone-900'
+						? 'text-stone-200'
 						: 'text-stone-200'
 				} font-bold`}
-				style={{
-					textShadow: selectedLights.includes(light.id)
-						? '0 0 16px rgb(249, 168, 212)'
-						: '0 0 16px rgb(41, 37, 36)',
-				}}
 			>
 				{light.name}
 			</p>
