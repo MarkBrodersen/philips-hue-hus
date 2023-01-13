@@ -1,13 +1,6 @@
 import Container from "../Container";
-import { BedSingle, Link } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
-import axios from "axios";
-import { LightBulbIcon } from "@heroicons/react/24/solid";
 import PowerButton from "../buttons/PowerButton";
 import { Link as LinkBtn } from "react-router-dom";
-import Container from "../Container";
-import { BedSingle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
@@ -15,7 +8,6 @@ import {
   LightBulbIcon,
   ExclamationTriangleIcon,
 } from "@heroicons/react/24/solid";
-import PowerButton from "../buttons/PowerButton";
 import classes from "../../assets/roomClasses";
 import LucideIcon from "../sub-components/LucideIcon";
 
