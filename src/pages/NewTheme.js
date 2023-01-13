@@ -9,12 +9,11 @@ const NewTheme = () => {
     const [isColorOpen, setColorOpen] = useState(false)
     const [currentColor, setCurrentColor] = useState("")
 
-    const handleColorChange = (color) => {
+    const handleColorChangeComplete = (color) => {
         setCurrentColor(color.hex)
-        
-       
+        setColorOpen(false)
     }
-
+    
     function iconPicker(icon) {
         setIcon(icon)
         setOpen(false)
@@ -29,10 +28,10 @@ const NewTheme = () => {
         </Container>
        
         </div>
-        <div className="w-32 ml-8 mt-6">
+        <div className="ml-8 mt-6">
         <Container fit>
-            <div className="p-4 ">
-            <button  onClick={() => setOpen(true)}>
+            <div className="p-4">
+            <button  onClick={() => setOpen(true)} >
                 {Icon === "bedsingle" ? (
                     <BedSingle color="white" size={38}/>
                 ) : Icon === "Monitor" ? (
@@ -54,6 +53,7 @@ const NewTheme = () => {
                     )
             }
                 </button>
+                
             </div>
           
         </Container>
@@ -72,34 +72,63 @@ const NewTheme = () => {
                  <button onClick={() => iconPicker("venetianmask")}> <VenetianMask color="white" size={48}/></button>
                  <button onClick={() => iconPicker("showerhead")}><ShowerHead color="white" size={48}/></button>
                  <button onClick={() => iconPicker("tent")}><Tent color="white" size={48}/></button>
-
+                    
                     </div>  
             </Sheet.Content>
         </Sheet.Container>
         </Sheet>
+                <div className="grid grid-flow-col mt-12 grid-rows-2 gap-6">
+                <Container fit>
+                    <div className="p-6 ">
+                        <div style={{background: currentColor}} className="h-20 w-32 rounded-3xl flex align-center justify-center">
+                            <button onClick={() => setColorOpen(true)} className="text-xl w-full">Color</button>
+                        </div>
+                    </div>
+                </Container>
 
                 <Container fit>
-                    <div style={{background: currentColor}} className="">
-                    <button onClick={() => setColorOpen(true)}>Change color</button>
+                    <div className="p-6 ">
+                        <div style={{background: currentColor}} className="h-20 w-32 rounded-3xl flex align-center justify-center">
+                            <button onClick={() => setColorOpen(true)} className="text-xl w-full">Color</button>
+                        </div>
                     </div>
-                  
                 </Container>
+
+                <Container fit>
+                    <div className="p-6 ">
+                        <div style={{background: currentColor}} className="h-20 w-32 rounded-3xl flex align-center justify-center">
+                            <button onClick={() => setColorOpen(true)} className="text-xl w-full">Color</button>
+                        </div>
+                    </div>
+                </Container>
+
+                <Container fit>
+                    <div className="p-6 ">
+                        <div style={{background: currentColor}} className="h-20 w-32 rounded-3xl flex align-center justify-center">
+                            <button onClick={() => setColorOpen(true)} className="text-xl w-full">Color</button>
+                        </div>
+                    </div>
+                </Container>
+                </div>
+
                 <Sheet isOpen={isColorOpen} detent="full-height" disableDrag={true} onClose={() => setColorOpen(false)}>
                     <Sheet.Container>
                     <Sheet.Header className="bg-zinc-900"/>
                         <Sheet.Content className="bg-zinc-900">
                             <div>
                             <button className="absolute top-0 right-5" onClick={() => setColorOpen(false)}><X color="white" size={28}/></button>
-                             <CirclePicker circleSpacing={38} circleSize={50} color={currentColor} onChangeComplete={handleColorChange} className=" absolute  justify-between  top-16 left-20"/>
+                             <CirclePicker circleSpacing={38} circleSize={50} color={currentColor} onChangeComplete={handleColorChangeComplete} className=" absolute  justify-between  top-16 left-20"/>
                             </div>
                        
                         </Sheet.Content>
                     </Sheet.Container>
             
                 </Sheet>
-           
-
+            
+                
+                <button className="w-1/2 ">Submit</button> 
     </div> 
+    
     );
 }
  

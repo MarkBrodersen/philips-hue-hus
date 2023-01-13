@@ -23,6 +23,7 @@ const Navigation = () => {
 					: place === '/themes'
 					? 'Themes'
 					: null}
+					
 			</h1>
 
 			<BurgerMenu />

@@ -63,7 +63,7 @@ const BurgerMenu = () => {
 								<NavLink to='/themes'>Themes</NavLink>
 							</li>
 							<li className='text-xl font-medium mt-5'>
-								<NavLink to='/newthemes'>New Theme</NavLink>
+								<NavLink to='/newtheme'>New Theme</NavLink>
 							</li>
 						</ul>
 					</motion.aside>
