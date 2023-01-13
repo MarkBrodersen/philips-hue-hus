@@ -23,7 +23,7 @@ export default function useAxios(endpoint, body, method = 'get') {
 				setError(err)
 				setLoading(false)
 			})
-	}, [endpoint, body, method])
+	}, [body, method])
 
 	return { response, error, loading }
 }
