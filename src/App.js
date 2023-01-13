@@ -1,56 +1,81 @@
-import axios from 'axios'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import axios from "axios";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import Home from './pages/Home'
-import SignIn from './pages/SignIn'
-import Layout from './Layout'
-import NewTheme from './pages/NewTheme'
-
+import Home from "./pages/Home";
+import SignIn from "./pages/SignIn";
+import Layout from "./Layout";
+import NewRoom from "./pages/NewRoom";
+import Loading from "./components/animation/Loading";
+import Rooms from "./pages/Rooms";
+import NewTheme from "./pages/NewTheme";
 
 function App() {
-	const [token, setToken] = useState('')
-	const username = localStorage.getItem('username')
-	const [loading, setLoading] = useState(true)
+  const [token, setToken] = useState("");
+  const username = localStorage.getItem("username");
+  const [loading, setLoading] = useState(true);
 
-	useEffect(() => {
-		setLoading(true)
-		axios.get(`http://192.168.8.100/api/${username}`).then(res => {
-			setLoading(false)
-			if (res.data.error) {
-				setToken(undefined)
-			} else {
-				setToken(username)
-			}
-		})
-	}, [])
+  useEffect(() => {
+    if (username) {
+      setLoading(true);
+      axios.get(`http://192.168.8.100/api/${username}`).then((res) => {
+        setLoading(false);
+        if (res.data.error) {
+          setToken(undefined);
+        } else {
+          setToken(username);
+        }
+      });
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
-	return (
-		// <div className='bg-zinc-900 min-h-screen p-12'>
-		// 	<Container fit>
-		// 		<h1 className='h-60 w-80'>Hej</h1>
-		// 	</Container>
-		// </div>
-		<BrowserRouter>
-			<Routes>
-				{loading ? (
-					<Route path='/' element={<Layout />}>
-						<Route index element={<div>Loading...</div>} />
-					</Route>
-				) : token ? (
-					<Route path='/' element={<Layout />}>
-						<Route index element={<Home />} />
-						<Route path="/newtheme" element={<NewTheme/>} />
-						
-					</Route>
-				) : (
-					<Route path='/' element={<Layout />}>
-						<Route index element={<SignIn />} />
-					</Route>
-				)}
-			</Routes>
-		</BrowserRouter>
-	)
+  return (
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+      <BrowserRouter>
+        <Routes>
+          {loading ? (
+            <Route path="/" element={<Layout />}>
+              <Route
+                index
+                element={
+                  <div className="h-screen w-screen fixed flex justify-center items-center">
+                    <Loading />
+                  </div>
+                }
+              />
+            </Route>
+          ) : token ? (
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="/new-room" element={<NewRoom />} />
+              <Route path="/rooms" element={<Rooms />} />
+              <Route path="/newtheme" element={<NewTheme/>} />
+            </Route>
+          ) : (
+            <Route path="/" element={<Layout />}>
+              <Route path="*" element={<SignIn />} />
+            </Route>
+          )}
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 }
 
-export default App
+export default App;
