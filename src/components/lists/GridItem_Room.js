@@ -184,9 +184,17 @@ export default function GridItem({ item }) {
           >
             <LinkBtn to={`/room/${item.id}`}>{item.name}</LinkBtn>
           </h3>
-          <div className="flex items-center gap-1">
-            <LightBulbIcon className="inline-block text-stone-500 h-4 w-4 md:h-3 md:w-3" />{" "}
-            <p className="text-stone-400 text-sm md:text-xs">
+          <div
+            className={`flex items-center gap-1 ${
+              lightErrors.length > 0 ? "text-yellow-400/75" : "text-stone-400"
+            }`}
+          >
+            {lightErrors.length > 0 ? (
+              <ExclamationTriangleIcon className="inline-block h-4 w-4 md:h-3 md:w-3" />
+            ) : (
+              <LightBulbIcon className="inline-block h-4 w-4 md:h-3 md:w-3" />
+            )}
+            <p className="text-stone-400 text-sm md:text-xs font-semibold">
               {item.lights.length}{" "}
               {item.lights.length === 1 ? "light" : "lights"}
             </p>
