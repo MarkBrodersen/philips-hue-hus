@@ -17,37 +17,30 @@ export default function SegmentedDropDown({
 	const groups = useFilteredArrays(items, item => item.type === 'Room')
 
 	const dropdown = useRef(null)
-	useClickOutside(dropdown, () => {
+	useClickOutside(dropdown, event => {
+		if (Array.from(event.target.classList).includes('dropdown')) return
+
 		setFocus(false)
 		setShowDropDown(false)
 	})
 
 	const dropdownVariants = {
 		container: {
-			closed: {
+			initial: {
 				opacity: 0,
-				// y: 24,
-				// transition: {
-				// 	type: 'spring',
-				// 	stiffness: 200,
-				// 	damping: 20,
-				// },
 			},
-			open: {
+			animate: {
 				opacity: 1,
-				// y: 0,
-				// transition: {
-				// 	type: 'spring',
-				// 	stiffness: 200,
-				// 	damping: 20,
-				// },
 				transition: {
 					staggerChildren: 0.1,
 				},
 			},
+			exit: {
+				opacity: 0,
+			},
 		},
 		children: {
-			closed: {
+			initial: {
 				opacity: 0,
 				y: 32,
 				transition: {
@@ -56,9 +49,68 @@ export default function SegmentedDropDown({
 					damping: 20,
 				},
 			},
-			open: {
+			animate: {
 				opacity: 1,
 				y: 0,
+				transition: {
+					type: 'spring',
+					stiffness: 200,
+					damping: 20,
+					staggerChildren: 0.1,
+					staggerDirection: -1,
+					delayChildren: 0.2,
+				},
+			},
+			exit: {
+				opacity: 0,
+				y: 32,
+				transition: {
+					type: 'spring',
+					stiffness: 200,
+					damping: 20,
+				},
+			},
+		},
+		subChildren: {
+			initial: {
+				x: -48,
+				opacity: 0,
+			},
+			animate: {
+				x: 0,
+				opacity: 1,
+			},
+			exit: {
+				x: 48,
+				opacity: 0,
+			},
+		},
+		horizontal: {
+			initial: {
+				opacity: 0,
+				y: 32,
+				transition: {
+					type: 'spring',
+					stiffness: 200,
+					damping: 20,
+				},
+			},
+			animate: {
+				opacity: 1,
+				y: 0,
+				transition: {
+					type: 'spring',
+					stiffness: 200,
+					damping: 20,
+					staggerChildren: 0.1,
+					staggerDirection: -1,
+					delayChildren: 0.2,
+				},
+			},
+			exit: {
+				opacity: 0,
+				y: 32,
+				height: 0,
 				transition: {
 					type: 'spring',
 					stiffness: 200,
@@ -83,7 +135,6 @@ export default function SegmentedDropDown({
 					}}
 					onBlur={() => {
 						setFocus(false)
-						if (selectedItems.length === 0) setShowDropDown(false)
 					}}
 				/>
 			</div>
@@ -93,46 +144,43 @@ export default function SegmentedDropDown({
 						<AnimatePresence>
 							{showDropDown && (
 								<motion.div
+									layout
 									variants={dropdownVariants.container}
-									initial='closed'
-									animate='open'
-									exit='closed'
-									className='flex flex-col gap-2'
+									initial='initial'
+									animate='animate'
+									exit='exit'
+									className='flex flex-col gap-2 bg-stone-800 shadow-container rounded-3xl overflow-hidden p-2'
 								>
 									<AnimatePresence>
-										<motion.div
-											key='selected'
-											variants={dropdownVariants.children}
-											className='w-full overflow-x-scroll scrollbar-hide'
-										>
-											<ul
+										{selectedItems?.length > 0 && (
+											<motion.div
 												key='selected'
-												className='flex items-center justify-end w-fit h-14 rounded-3xl gap-2'
+												variants={dropdownVariants.children}
+												className='w-full overflow-x-auto overflow-y-visible scrollbar-hide rounded-2xl'
 											>
-												<li className='h-full bg-pink-300 rounded-3xl shadow-pink flex items-center px-6 text-stone-900 font-bold'>
-													Hej
-												</li>
-												<li className='h-full bg-pink-300 rounded-3xl shadow-pink flex items-center px-6 text-stone-900 font-bold'>
-													Hej
-												</li>
-												<li className='h-full bg-pink-300 rounded-3xl shadow-pink flex items-center px-6 text-stone-900 font-bold'>
-													Hej
-												</li>
-												<li className='h-full bg-pink-300 rounded-3xl shadow-pink flex items-center px-6 text-stone-900 font-bold'>
-													Hej
-												</li>
-												<li className='h-full bg-pink-300 rounded-3xl shadow-pink flex items-center px-6 text-stone-900 font-bold'>
-													Hej
-												</li>
-												<li className='h-full bg-pink-300 rounded-3xl shadow-pink flex items-center px-6 text-stone-900 font-bold'>
-													Hej
-												</li>
-											</ul>
-										</motion.div>
+												<motion.ul
+													layout
+													key='selected'
+													className='flex flex-row-reverse items-center justify-end w-fit h-14 rounded-2xl gap-2'
+												>
+													{selectedItems &&
+														selectedItems.map(item => (
+															<SelectedLight
+																key={item.id}
+																item={item}
+																variants={dropdownVariants.subChildren}
+																setList={setSelectedItems}
+															/>
+														))}
+												</motion.ul>
+											</motion.div>
+										)}
+									</AnimatePresence>
+									<AnimatePresence>
 										<motion.ul
 											key='groups'
 											variants={dropdownVariants.children}
-											className='bg-stone-800 flex flex-col gap-2 shadow-container rounded-3xl max-h-72 min-h-14 overflow-y-auto py-2'
+											className='flex flex-col gap-2 max-h-72 min-h-14 overflow-y-auto'
 										>
 											{groups.map(group => (
 												<li key={group.id}>
@@ -156,13 +204,32 @@ export default function SegmentedDropDown({
 	)
 }
 
+function SelectedLight({ item, variants, setList }) {
+	return (
+		<>
+			{item.name ? (
+				<motion.li
+					variants={variants}
+					className='dropdown h-full w-fit inline-flex bg-pink-300 shadow-pink items-center rounded-2xl px-6 py-2 text-stone-900 font-bold whitespace-nowrap overflow-hidden'
+					whileTap={{ scale: 0.95 }}
+					onClick={() => {
+						setList(prev => prev.filter(light => light.id !== item.id))
+					}}
+				>
+					{item?.name}
+				</motion.li>
+			) : null}
+		</>
+	)
+}
+
 function Group({ group, list, setList, filter }) {
 	const items = group.lights
 	return (
 		<>
 			{items.length > 0 && (
 				<div className='p-2 flex flex-col gap-1'>
-					<div className='flex justify-between items-center px-6'>
+					<div className='flex justify-between items-center px-4'>
 						<h3 className='text-xs tracking-wider font-bold uppercase text-stone-500'>
 							{group.name}
 						</h3>
@@ -172,7 +239,13 @@ function Group({ group, list, setList, filter }) {
 					</div>
 					<ul>
 						{items.map(item => (
-							<Light id={item} list={list} setList={setList} filter={filter} />
+							<Light
+								key={item}
+								id={item}
+								list={list}
+								setList={setList}
+								filter={filter}
+							/>
 						))}
 					</ul>
 				</div>
@@ -218,9 +291,9 @@ function Light({ id, setList, list, filter, setIsValid }) {
 							setList([...list, light])
 						}
 					}}
-					className={`h-14 flex items-center px-6 cursor-pointer hover:bg-stone-700/25 ${list.find(
+					className={`h-14 flex items-center px-4 cursor-pointer hover:bg-stone-700/25 ${list.find(
 						item => (item.id === id ? 'bg-red-500' : '')
-					)} rounded-3xl`}
+					)} rounded-2xl`}
 				>
 					<div className='flex flex-col'>
 						<h4 className='font-bold'>{light?.name}</h4>
