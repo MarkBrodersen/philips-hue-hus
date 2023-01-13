@@ -10,6 +10,7 @@ import Layout from "./Layout";
 import NewRoom from "./pages/NewRoom";
 import Loading from "./components/animation/Loading";
 import Rooms from "./pages/Rooms";
+import RoomDetails from "./templates/RoomDetails";
 
 function App() {
   const [token, setToken] = useState("");
@@ -64,6 +65,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path="/new-room" element={<NewRoom />} />
               <Route path="/rooms" element={<Rooms />} />
+              <Route path="/room/:id" element={<RoomDetails />} />
             </Route>
           ) : (
             <Route path="/" element={<Layout />}>

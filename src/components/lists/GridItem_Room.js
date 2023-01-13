@@ -1,12 +1,12 @@
 import Container from "../Container";
-import { BedSingle } from "lucide-react";
+import { BedSingle, Link } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { PowerIcon } from "@heroicons/react/24/outline";
 import { useRef, useState } from "react";
 import useAxios from "../../hooks/useAxios";
 import axios from "axios";
 import { LightBulbIcon } from "@heroicons/react/24/solid";
 import PowerButton from "../buttons/PowerButton";
+import { Link as LinkBtn } from "react-router-dom";
 
 export default function GridItem({ item, on, id }) {
   const container = useRef(null);
@@ -50,24 +50,6 @@ export default function GridItem({ item, on, id }) {
           setAny(true);
         });
     }
-  }
-
-  function raveParty() {
-    console.log("rave party");
-    axios
-      .put(
-        `http://192.168.8.100/api/${localStorage.getItem("username")}/groups/${
-          item.id
-        }/action`,
-        {
-          on: true,
-          effect: "colorloop",
-        }
-      )
-      .then((response) => {
-        setAll(true);
-        setAny(true);
-      });
   }
 
   return (
@@ -146,13 +128,12 @@ export default function GridItem({ item, on, id }) {
         </div>
         <div ref={container}>
           <h3
-            onClick={raveParty}
             style={{
               width: container.current?.clientWidth,
             }}
             className="text-stone-100 font-bold text-2xl md:text-xl items-center text-ellipsis overflow-x-hidden h-fit whitespace-nowrap"
           >
-            {item.name}
+            <LinkBtn to={`/room/${item.id}`}>{item.name}</LinkBtn>
           </h3>
           <div className="flex items-center gap-1">
             <LightBulbIcon className="inline-block text-stone-500 h-4 w-4 md:h-3 md:w-3" />{" "}
