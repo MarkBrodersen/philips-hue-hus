@@ -7,7 +7,7 @@ export default function ListItem_Lights({ item }) {
     if (on) {
       axios
         .put(
-          `http://192.168.8.100/api/${localStorage.getItem(
+          `http://192.168.0.118/api/${localStorage.getItem(
             "username"
           )}/lights/${item.id}/state`,
           {
@@ -20,7 +20,7 @@ export default function ListItem_Lights({ item }) {
     } else {
       axios
         .put(
-          `http://192.168.8.100/api/${localStorage.getItem(
+          `http://192.168.0.118/api/${localStorage.getItem(
             "username"
           )}/lights/${item.id}/state`,
           {

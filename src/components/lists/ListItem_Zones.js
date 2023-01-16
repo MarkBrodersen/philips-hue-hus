@@ -9,7 +9,7 @@ export default function ListItem_Zones({ item }) {
     if (any) {
       axios
         .put(
-          `http://192.168.8.100/api/${localStorage.getItem(
+          `http://192.168.0.118/api/${localStorage.getItem(
             "username"
           )}/groups/${item.id}/action`,
           {
@@ -23,7 +23,7 @@ export default function ListItem_Zones({ item }) {
     } else {
       axios
         .put(
-          `http://192.168.8.100/api/${localStorage.getItem(
+          `http://192.168.0.118/api/${localStorage.getItem(
             "username"
           )}/groups/${item.id}/action`,
           {

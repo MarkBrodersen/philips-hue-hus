@@ -12,7 +12,7 @@ export default function useAxios(endpoint, body, method = 'get') {
 		setLoading(true)
 		axios({
 			method,
-			url: `http://192.168.8.100/api/${username}/${endpoint}`,
+			url: `http://192.168.0.118/api/${username}/${endpoint}`,
 			data: body,
 		})
 			.then(res => {
