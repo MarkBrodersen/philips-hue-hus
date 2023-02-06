@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, spring } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { ArrowDownCircleIcon } from '@heroicons/react/24/solid'
 import LucideIcon from './sub-components/LucideIcon'

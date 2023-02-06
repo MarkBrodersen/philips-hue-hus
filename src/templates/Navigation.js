@@ -1,7 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { ChevronLeft } from 'lucide-react'
 import BurgerMenu from '../components/sub-components/BurgerMenu'
-import { useEffect } from 'react'
 
 const Navigation = () => {
 	let place = useLocation().pathname

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import useAxios from '../hooks/useAxios'
 import useFilteredArrays from '../hooks/useFilteredArrays'
@@ -11,7 +11,7 @@ export default function SegmentedDropDown({
 	placeholder,
 }) {
 	const [value, setValue] = useState('')
-	const [focus, setFocus] = useState(false)
+	// const [focus, setFocus] = useState(false)
 	const [showDropDown, setShowDropDown] = useState(false)
 
 	const groups = useFilteredArrays(items, item => item.type === 'Room')
@@ -20,7 +20,7 @@ export default function SegmentedDropDown({
 	useClickOutside(dropdown, event => {
 		if (Array.from(event.target.classList).includes('dropdown')) return
 
-		setFocus(false)
+		// setFocus(false)
 		setShowDropDown(false)
 	})
 
@@ -130,11 +130,11 @@ export default function SegmentedDropDown({
 					value={value}
 					onChange={e => setValue(e.target.value)}
 					onFocus={() => {
-						setFocus(true)
+						// setFocus(true)
 						setShowDropDown(true)
 					}}
 					onBlur={() => {
-						setFocus(false)
+						// setFocus(false)
 					}}
 				/>
 			</div>
@@ -255,7 +255,7 @@ function Group({ group, list, setList, filter }) {
 }
 
 function Light({ id, setList, list, filter, setIsValid }) {
-	const { response: lightResponse, loading } = useAxios('lights/' + id)
+	const { response: lightResponse } = useAxios('lights/' + id)
 	const light = {
 		...lightResponse,
 		id: id,

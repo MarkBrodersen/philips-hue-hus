@@ -15,12 +15,10 @@ export default function NewRoom({ open, setOpen }) {
 	const [selectedClass, setSelectedClass] = useState()
 	const [selectedLights, setSelectedLights] = useState([])
 
-	// const { response, loading } = useAxios('groups', { name, lights }, 'put')
-
-	const { response: lightsObject, loading: loadingLights } = useAxios('lights')
+	const { response: lightsObject } = useAxios('lights')
 	const lights = useFilteredArrays(lightsObject)
 
-	const { response: groupsObject, loading: loadingGroups } = useAxios('groups')
+	const { response: groupsObject } = useAxios('groups')
 	const groups = useFilteredArrays(groupsObject)
 
 	const lightsNotInGroup = lights?.filter(light => {
