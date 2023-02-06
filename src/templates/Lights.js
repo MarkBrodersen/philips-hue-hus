@@ -18,8 +18,6 @@ export default function Lights({}) {
     setLight(Light);
   }, [response]);
 
-  // console.log(light[0].state.reachable);
-
   return (
     <>
       {light &&
